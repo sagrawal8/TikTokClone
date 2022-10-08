@@ -124,7 +124,7 @@ const Upload = () => {
                     <input
                       type='file'
                       name='upload-video'
-                      onChange={(e) => uploadVideo(e)}
+                      onChange={uploadVideo}
                       className='w-0 h-0'
                     />
                   </label>
@@ -136,15 +136,7 @@ const Upload = () => {
                       loop
                       src={videoAsset?.url}
                     />
-                    <div className=' flex justify-between gap-20'>
-                      <p className='text-lg'>{videoAsset.originalFilename}</p>
-                      <button
-                        type='button'
-                        className=' rounded-full bg-gray-200 text-red-400 p-2 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out'
-                        onClick={() => setVideoAsset(undefined)}
-                      >
-                        <MdDelete />
-                      </button>
+                    <div className=' flex justify-between pb-10'>
                     </div>
                   </div>
                 )}
@@ -153,11 +145,11 @@ const Upload = () => {
           </div>
           {wrongFileType && (
             <p className='text-center text-xl text-red-400 font-semibold mt-4 w-[260px]'>
-              Please select an video file (mp4 or webm or ogg)
+              Please select a video file (mp4 or webm or ogg)
             </p>
           )}
         </div>
-        <div className='flex flex-col gap-3 pb-10'>
+        <div className='flex flex-col gap-3 pb-10 p-10'>
           <label className='text-md font-medium '>Caption</label>
           <input
             type='text'
@@ -178,6 +170,7 @@ const Upload = () => {
                 key={item.name}
                 className=' outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300'
                 value={item.name}
+                defaultValue={""}
               >
                 {item.name}
               </option>

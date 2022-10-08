@@ -4,7 +4,7 @@ import {NextPage} from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import {HiVolumeUp, HiVolumeOff} from 'react-icons/hi';
-import {BsPlay, BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs';
+import {BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs';
 import {GoVerified} from 'react-icons/go';
 
 interface IProps {
@@ -25,6 +25,12 @@ const VideoCard: NextPage<IProps> = ({post}) => {
       setPlaying(true);
     }
   }
+
+  useEffect(() => {
+    if(vidRef?.current) {
+      vidRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
   return (
     <div className='flex flex-col border-b-2 border-gray-200 pb-6'>
       <div>
@@ -64,7 +70,7 @@ const VideoCard: NextPage<IProps> = ({post}) => {
           className="round-3xl"
           onMouseEnter={() => {setIsHover(true)}}
           onMouseLeave={() => {setIsHover(false)}}>
-          <Link href='/'>
+          <Link href={`/detail/${post._id}`}>
             <video 
               className='lg:w-[600px] h-[300px] md:h-[400px] lg:h-[528px] w-[200px] rounded-2xl cursor-pointer bg-gray-100'
               loop
